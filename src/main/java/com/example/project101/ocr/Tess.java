@@ -52,7 +52,7 @@ public class Tess {
             // Google Translation API JSON 키 파일 경로
             // 업로드 시 빼고 업로드 요망 - String jsonKeyFilePath 변수명은 쓰되, "" 안에 있는 글자는 명시하지 말 것.
             // 이 주석 바로 밑에 작성(변수명: String jsonKeyFilePath)
-            String jsonKeyFilePath = "";
+            String jsonKeyFilePath = "/Users/project/spherical-entry-391823-2f5e9256772c.json";
 
             // JSON 키 파일을 사용하여 인증 정보 로드
             GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(jsonKeyFilePath));
