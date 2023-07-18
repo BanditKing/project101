@@ -1,13 +1,17 @@
 package com.example.project101.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 public class MainController {
+    //private static String imagePath="./images/english_sentence5.png";
+
     @RequestMapping("/")
     String home() {
-        return "정상 작동중 입니다.";
+        //System.out.println("mainge :" + imagePath);
+        return "";
     }
 }

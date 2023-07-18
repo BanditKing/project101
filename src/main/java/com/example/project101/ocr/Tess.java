@@ -1,5 +1,8 @@
 package com.example.project101.ocr;
 
+
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -10,30 +13,41 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+@RequiredArgsConstructor
 public class Tess {
+    // 이미지 파일 경로
+    //private static String imagePath;
+
     public static void main(String[] args) {
-        // 이미지 파일 경로
-        String imagePath = "/Users/project/OCR_For_Java-master-2/images/english_sentence5.png";
+    //public void getTes() {
+
+         //String imagePath ="/Users/project/project_101-main/images/english_sentence5.png";
 
         // Tesseract OCR 인스턴스 생성
         ITesseract tesseract = new Tesseract();
-
+        tesseract.setDatapath("/usr/local/share/tessdata");
         // OCR 언어 설정
         // 다수의 언어 설정 (예: 영어, 프랑스어, 독일어)
-        String[] languages = {"eng", "fra", "deu", "chi_sim", "jpn"};
+        String[] languages = {"eng"};
         for (String language : languages) {
             tesseract.setLanguage(language);
         }
 
         try {
             // 이미지 파일로부터 텍스트 추출
-            File imageFile = new File(imagePath);
-            String extractedText = tesseract.doOCR(imageFile);
+            File imageFile = new File("./images/english_sentence5.png");
+            BufferedImage img =  ImageIO.read(imageFile);
+            // String extractedText = tesseract.doOCR(imageFile);
+            String extractedText = tesseract.doOCR(img);
 
             // Google Translation API JSON 키 파일 경로
             // 업로드 시 빼고 업로드 요망 - String jsonKeyFilePath 변수명은 쓰되, "" 안에 있는 글자는 명시하지 말 것.
